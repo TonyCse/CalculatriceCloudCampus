@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculatrice</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+      <body>
+            <h1>Calculatrice JavaScript Cloud Campus</h1>
+            <button id="toggleCalculator">Afficher / Cacher la Calculatrice</button>
+            <div id="calculator" class="calculator">
+                  <h2>Calculatrice</h2>
+                  <form id="calculatorForm">
+                        <input type="number" id="num1" placeholder="Saisir un chiffre" required>
+                        <select id="operation">
+                              <option value="add">+</option>
+                              <option value="subtract">-</option>
+                              <option value="multiply">*</option>
+                              <option value="divide">/</option>
+                        </select>
+                        <input type="number" id="num2" placeholder="Saisir un chiffre" required>
+                        <button type="submit">Calculer</button>
+                  </form>
+            </div>
+            <div id="infoText" class="info-text"></div>
+
+            <script>
+                  // EXERCICE 1
+
+                  // Ecouter ce que le contient le formulaire calculatorForm et executer la fonction suivante lorsque le formulaire est soumis
+                  document.getElementById('calculatorForm').addEventListener('submit', function(e) {
+
+                        // Empeche le rechargement de la page (comportement par défault du formulaire)
+                        e.preventDefault();
+
+                        // Déclaration de la variable num1 en récupèrant la valeur de l'input id=#num1
+                        const num1 = document.getElementById('num1').value;
+
+                        // Déclaration de la variable num2 en récupèrant la valeur de l'input id=#num2
+                        const num2 = document.getElementById('num2').value;
+
+                        // Déclaration de la variable operation en récupèrant la valeur de l'opération selectionnée
+                        const operation = document.getElementById('operation').value;
+
+                        // Déclaration de la variable result où l'ont va stocker le résultat par la suite
+                        let result;
+
+                        // Vérifier la valeur de l'opération selectionnée
+                        if (operation === 'add') {
+                              // Effectuer l'addition
+                              result = num1 + num2;
+                        } else if (operation === 'subtract') {
+                              // Effectuer la soustraction
+                              result = num1 - num2;
+                        } else if (operation === 'multiply') {
+                              // Effectuer la multipli
+                              result = num1 * num2;
+                        } else if (operation === 'divide') {
+                              // effectuer la division en vérifiant que le chiffre indiqué pour la division n'est pas zéro
+                              if (num2 !== 0) {
+                                    result = num1 / num2;
+                        } else {
+                              // Si le chiffre indiqué est zéro retourner un message d'alerte
+                              alert("Impossible de diviser par zéro");
+                              return;
+                        }
+                        } else {
+                              // Si l'opération est invalide retourner un message d'alerte et arrêter la fonction
+                              alert("Opération invalide");
+                              return;
+                        }
+
+                        // Déclaration de la variable operationSymbol afin de récupérer le symbol de l'opération
+                        let operationSymbol;
+                        if (operation === 'add') {
+                              operationSymbol = '+';
+                        } else if (operation === 'subtract') {
+                              operationSymbol = '-';
+                        } else if (operation === 'multiply') {
+                              operationSymbol = '*';
+                        } else if (operation === 'divide') {
+                              operationSymbol = '/';
+                        }
+
+                        // Affichage du message d'alerte avec le calcul et le résultat
+                        alert(num1 + ' ' + operationSymbol + ' ' + num2 + ' = ' + result);
+                  });
+
+                  // EXERCICE 2
+
+                  // Déclaration de la variable toggleButton afin de pouvoir ajouter un addEventListener click sur l'id toggleCalculator
+                  const toggleButton = document.getElementById('toggleCalculator');
+
+                  // Déclaration de la variable calculator afin de pouvoir modifier le style de l'id calculator
+                  const calculator = document.getElementById('calculator');
+
+                  // Ecouter le click de l'utilisateur sur le toggleButton et execute la fonction suivante
+                  toggleButton.addEventListener('click', function() {
+                        // Modification du css de #calculator par un display block ou none
+                        calculator.style.display = (calculator.style.display === 'none' || calculator.style.display === '') ? 'block' : 'none';
+                  });
+
+                  // EXERCICE 3
+
+                  // Ecoute du survol de la souris et affichage dynamique sur le toggleButton
+                  toggleButton.addEventListener('mouseover', function() {
+                        infoText.textContent = "Cliquez pour afficher la calculatrice";
+                  });
+
+                  // Ecoute du survol de la souris et affichage dynamique sur l'input 1
+                  num1.addEventListener('mouseover', function() {
+                        infoText.textContent = "Saisir un chiffre";
+                  });
+
+                  // Ecoute du survol de la souris et affichage dynamique sur le selecteur d'opéaration
+                  operation.addEventListener('mouseover', function() {
+                        infoText.textContent = "Selectionner un operateur: +-*/";
+                  });
+
+                  // Ecoute du survol de la souris et affichage dynamique sur l'input 2
+                  num2.addEventListener('mouseover', function() {
+                        infoText.textContent = "Saisir un chiffre";
+                  });
+            </script>
+      </body>
+</html>
